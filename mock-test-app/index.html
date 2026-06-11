@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SSC CGL Practice Platform — Full Mock Tests & Topic-wise Tests from Previous Year Questions (2019-2025)">
+  <title>SSC CGL Practice — PYQ Mock Tests</title>
+  <link rel="stylesheet" href="index.css?v=4">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+</head>
+<body>
+
+  <!-- ============================================================
+       SCREEN 1: HOME
+       ============================================================ -->
+  <section id="screen-home" class="screen active">
+    <div class="home-container">
+      <header class="home-header">
+        <div class="home-logo">
+          <div class="home-logo-icon">CGL</div>
+        </div>
+        <h1 class="home-title">SSC CGL Practice</h1>
+        <p class="home-subtitle">Previous Year Questions · 2019–2025 · All Shifts</p>
+      </header>
+
+      <div class="home-cards">
+        <!-- Full Mock Test CTA -->
+        <div class="cta-card" id="cta-full-test" tabindex="0" role="button" aria-label="Start Full Mock Test">
+          <div class="cta-card-icon">📝</div>
+          <h2 class="cta-card-title">Full Mock Test</h2>
+          <p class="cta-card-desc">100 Questions · 60 Minutes · 4 Sections<br>Simulates the real SSC CGL Tier-1 exam</p>
+        </div>
+
+        <!-- Topic-wise Test CTA -->
+        <div class="cta-card" id="cta-topic-test" tabindex="0" role="button" aria-label="Start Topic-wise Test">
+          <div class="cta-card-icon">🎯</div>
+          <h2 class="cta-card-title">Topic-wise Test</h2>
+          <p class="cta-card-desc">25 Questions · 15 Minutes · Pick Your Topic<br>Focus on your weak areas with targeted practice</p>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-bar">
+        <div class="stat-item">
+          <div class="stat-value" id="stat-tests">0</div>
+          <div class="stat-label">Tests Taken</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="stat-accuracy">—</div>
+          <div class="stat-label">Avg Accuracy</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="stat-best">—</div>
+          <div class="stat-label">Best Score</div>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-top: var(--sp-6);">
+        <p style="font-size: var(--font-xs); color: var(--color-text-muted);" id="db-status">Loading question database…</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SCREEN 2: SECTION SELECTION (Full Mock Test)
+       ============================================================ -->
+  <section id="screen-section-select" class="screen">
+    <div class="selection-container">
+      <button class="back-btn" id="btn-back-home-from-section" aria-label="Back to Home">← Back</button>
+      <h1 class="selection-title">Choose Your First Section</h1>
+      <p class="selection-subtitle">Select which section to attempt first. Each section has 25 questions and a 15-minute timer.<br>You cannot switch sections until the timer expires.</p>
+
+      <div class="section-cards" id="section-cards-container">
+        <div class="section-card" data-section="QUANT" tabindex="0" role="button">
+          <div class="section-card-emoji">🔢</div>
+          <div class="section-card-name">Quantitative Aptitude</div>
+          <div class="section-card-meta">25 Questions · 15 Minutes</div>
+        </div>
+        <div class="section-card" data-section="REASONING" tabindex="0" role="button">
+          <div class="section-card-emoji">🧠</div>
+          <div class="section-card-name">General Intelligence & Reasoning</div>
+          <div class="section-card-meta">25 Questions · 15 Minutes</div>
+        </div>
+        <div class="section-card" data-section="GS" tabindex="0" role="button">
+          <div class="section-card-emoji">🌍</div>
+          <div class="section-card-name">General Awareness</div>
+          <div class="section-card-meta">25 Questions · 15 Minutes</div>
+        </div>
+        <div class="section-card" data-section="ENGLISH" tabindex="0" role="button">
+          <div class="section-card-emoji">📖</div>
+          <div class="section-card-name">English Comprehension</div>
+          <div class="section-card-meta">25 Questions &middot; 15 Minutes</div>
+        </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SCREEN 3: TOPIC SELECTION (Topic-wise Test)
+       ============================================================ -->
+  <section id="screen-topic-select" class="screen">
+    <div class="topic-container">
+      <button class="back-btn" id="btn-back-home-from-topic" aria-label="Back to Home">← Back</button>
+      <h1 class="selection-title">Choose a Topic</h1>
+      <p class="selection-subtitle">Pick a specific topic from the syllabus. 25 questions · 15-minute timer.</p>
+
+      <div id="topic-accordion-container">
+        <!-- Populated dynamically by app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SCREEN 4: ACTIVE TEST
+       ============================================================ -->
+  <section id="screen-test" class="screen">
+    <div class="test-layout">
+      <!-- Progress bar -->
+      <div class="test-progress-bar">
+        <div class="test-progress-fill" id="test-progress-fill" style="width: 0%"></div>
+      </div>
+
+      <!-- Top bar -->
+      <div class="test-topbar">
+        <div class="test-section-info">
+          <span class="test-section-badge" id="test-section-badge">QUANT</span>
+          <div class="test-section-tabs" id="test-section-tabs">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+        <div class="timer-area">
+          <div class="timer-display">
+            <span class="timer-label">Section Time</span>
+            <span class="timer-value" id="timer-section" aria-live="polite">15:00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main question area -->
+      <div class="test-main" id="test-main">
+        <div class="question-number" id="question-number">Question 1 of 25</div>
+        <div class="question-text" id="question-text">Loading question...</div>
+        <div class="question-image-container" id="question-image-container" style="display:none;">
+          <img id="question-image" src="" alt="Question figure" class="question-image" />
+        </div>
+
+        <fieldset class="options-group" id="options-group" aria-label="Answer options">
+          <legend class="sr-only">Select your answer</legend>
+          <label class="option-item" id="option-A" data-option="A">
+            <input type="radio" name="answer" value="A" class="option-radio">
+            <span class="option-indicator"></span>
+            <span class="option-letter">A.</span>
+            <span class="option-text" id="option-text-A"></span>
+          </label>
+          <label class="option-item" id="option-B" data-option="B">
+            <input type="radio" name="answer" value="B" class="option-radio">
+            <span class="option-indicator"></span>
+            <span class="option-letter">B.</span>
+            <span class="option-text" id="option-text-B"></span>
+          </label>
+          <label class="option-item" id="option-C" data-option="C">
+            <input type="radio" name="answer" value="C" class="option-radio">
+            <span class="option-indicator"></span>
+            <span class="option-letter">C.</span>
+            <span class="option-text" id="option-text-C"></span>
+          </label>
+          <label class="option-item" id="option-D" data-option="D">
+            <input type="radio" name="answer" value="D" class="option-radio">
+            <span class="option-indicator"></span>
+            <span class="option-letter">D.</span>
+            <span class="option-text" id="option-text-D"></span>
+          </label>
+        </fieldset>
+      </div>
+
+      <!-- Sidebar / Palette -->
+      <div class="test-sidebar">
+        <div class="sidebar-title">Question Palette</div>
+        <div class="palette-grid" id="palette-grid">
+          <!-- 25 buttons populated dynamically -->
+        </div>
+        <div class="palette-legend">
+          <div class="legend-item"><span class="legend-dot not-visited"></span> Not Visited</div>
+          <div class="legend-item"><span class="legend-dot answered"></span> Answered</div>
+          <div class="legend-item"><span class="legend-dot review"></span> Review</div>
+          <div class="legend-item"><span class="legend-dot visited"></span> Visited</div>
+        </div>
+        <div class="sidebar-submit">
+          <button class="btn btn-danger btn-lg" id="btn-submit-test" style="width:100%">Submit Test</button>
+        </div>
+      </div>
+
+      <!-- Bottom toolbar -->
+      <div class="test-toolbar">
+        <button class="btn btn-secondary" id="btn-prev">← Previous</button>
+        <button class="btn btn-warning btn-sm" id="btn-review">⚑ Mark for Review</button>
+        <button class="btn btn-primary" id="btn-clear">Clear Response</button>
+        <button class="btn btn-primary" id="btn-next">Save & Next →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SCREEN 5: REPORT
+       ============================================================ -->
+  <section id="screen-report" class="screen">
+    <div class="report-container">
+      <button class="back-btn" id="btn-back-home-from-report" aria-label="Back to Home">← Back to Home</button>
+
+      <header class="report-header">
+        <h1 class="report-title">📊 Test Report</h1>
+        <p class="report-subtitle" id="report-subtitle">Full Mock Test — Completed</p>
+      </header>
+
+      <!-- Score Card -->
+      <div class="score-card">
+        <div class="score-circle">
+          <svg viewBox="0 0 120 120">
+            <circle class="track" cx="60" cy="60" r="52"></circle>
+            <circle class="fill" id="score-ring" cx="60" cy="60" r="52" stroke-dasharray="326.73" stroke-dashoffset="326.73"></circle>
+          </svg>
+          <div class="score-text">
+            <div class="score-number" id="score-number">0</div>
+            <div class="score-total" id="score-total">/ 200</div>
+          </div>
+        </div>
+
+        <div class="score-metrics">
+          <div class="score-metric">
+            <div class="score-metric-value info" id="metric-accuracy">0%</div>
+            <div class="score-metric-label">Accuracy</div>
+          </div>
+          <div class="score-metric">
+            <div class="score-metric-value success" id="metric-correct">0</div>
+            <div class="score-metric-label">Correct</div>
+          </div>
+          <div class="score-metric">
+            <div class="score-metric-value danger" id="metric-wrong">0</div>
+            <div class="score-metric-label">Wrong</div>
+          </div>
+          <div class="score-metric">
+            <div class="score-metric-value warning" id="metric-unattempted">0</div>
+            <div class="score-metric-label">Unattempted</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts -->
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-card-title">Answer Distribution</div>
+          <div class="chart-canvas-wrapper">
+            <canvas id="chart-donut" width="240" height="240"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-card-title">Section-wise Accuracy</div>
+          <div class="chart-canvas-wrapper">
+            <canvas id="chart-bar" width="300" height="240"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section Breakdown Table -->
+      <div class="report-section">
+        <h2 class="report-section-title">📋 Section-wise Breakdown</h2>
+        <table class="report-table" id="report-breakdown-table">
+          <thead>
+            <tr>
+              <th>Section</th>
+              <th>Questions</th>
+              <th>Attempted</th>
+              <th>Correct</th>
+              <th>Wrong</th>
+              <th>Unattempted</th>
+              <th>Score</th>
+              <th>Accuracy</th>
+            </tr>
+          </thead>
+          <tbody id="report-breakdown-body">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Question Review -->
+      <div class="report-section">
+        <h2 class="report-section-title">🔍 Question Review</h2>
+        <div class="review-filters" id="review-filters">
+          <button class="review-filter-btn active" data-filter="all">All</button>
+          <button class="review-filter-btn" data-filter="correct">✓ Correct</button>
+          <button class="review-filter-btn" data-filter="wrong">✗ Wrong</button>
+          <button class="review-filter-btn" data-filter="unattempted">— Unattempted</button>
+        </div>
+        <div class="review-list" id="review-list">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Bottom actions -->
+      <div style="text-align: center; padding: var(--sp-6) 0;">
+        <button class="btn btn-primary btn-lg" id="btn-reattempt-wrong">🔄 Reattempt Wrong Questions</button>
+        <button class="btn btn-secondary btn-lg" id="btn-new-test" style="margin-left: var(--sp-3);">➕ New Test</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MODAL
+       ============================================================ -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div class="modal-icon" id="modal-icon">⏱️</div>
+      <h2 class="modal-title" id="modal-title">Section Time Expired</h2>
+      <p class="modal-text" id="modal-text">Your time for this section is up. Please choose the next section to attempt.</p>
+      <div class="modal-actions" id="modal-actions">
+        <button class="btn btn-primary" id="modal-btn-primary">Continue</button>
+        <button class="btn btn-secondary" id="modal-btn-secondary" style="display:none">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- ARIA Live region for timer announcements -->
+  <div class="sr-only" aria-live="assertive" id="aria-announcer"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="app.js?v=4"></script>
+</body>
+</html>
