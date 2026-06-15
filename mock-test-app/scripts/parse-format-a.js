@@ -16,10 +16,15 @@ const pdfjsLib = require('pdfjs-dist');
 
 // Section header patterns
 const SECTION_HEADERS = [
-  { regex: /General\s*Intelligence|Reasoning/i, section: 'REASONING' },
-  { regex: /General\s*Awareness|General\s*Knowledge|General\s*Studies/i, section: 'GS' },
-  { regex: /Quantitative\s*Aptitude|Mathematics/i, section: 'QUANT' },
-  { regex: /English\s*Comprehension|English\s*Language/i, section: 'ENGLISH' }
+  { regex: /^Section\s*[:\-]\s*(.*General Intelligence.*|.*Reasoning.*)/i, section: 'REASONING' },
+  { regex: /^Section\s*[:\-]\s*(.*General Awareness.*|.*General Knowledge.*|.*General Studies.*)/i, section: 'GS' },
+  { regex: /^Section\s*[:\-]\s*(.*Quantitative Aptitude.*|.*Mathematics.*|.*Mathematical Ability.*)/i, section: 'QUANT' },
+  { regex: /^Section\s*[:\-]\s*(.*English.*|.*Language Comprehension.*)/i, section: 'ENGLISH' },
+  // Fallback for lines that are exactly the section name without "Section:"
+  { regex: /^(General Intelligence and Reasoning|General Intelligence|Reasoning|Reasoning Ability)$/i, section: 'REASONING' },
+  { regex: /^(General Awareness|General Knowledge|General Studies)$/i, section: 'GS' },
+  { regex: /^(Quantitative Aptitude|Mathematics|Mathematical Ability)$/i, section: 'QUANT' },
+  { regex: /^(English Comprehension|English Language|English|Language Comprehension)$/i, section: 'ENGLISH' },
 ];
 
 const DEFAULT_SECTION_ORDER = ['REASONING', 'GS', 'QUANT', 'ENGLISH'];

@@ -18,6 +18,9 @@ const QUESTIONS_FILE = path.resolve(DATA_DIR, 'questions.json');
 // Only match questions that DEFINITELY reference a visual figure, table, or graph
 const IMAGE_KEYWORDS = /\b(figure|diagram|embedded|mirror image|water image|paper\s*fold|unfold|complete the pattern|question figure|answer figure|problem figure|find the missing|number of triangles|number of squares|how many triangles|how many squares|counting\s*figure|table|graph|pie chart|bar graph|histogram)\b/i;
 
+// Patterns that indicate the PDF text extractor dropped the math equation or statements
+const SUSPICIOUS_PATTERNS = /solve the following|what is the value of \?|what will be the value of \?|if , then|which is\/are correct\?/i;
+
 const MIN_IMAGE_SIZE = 5000; // 5KB minimum — anything smaller is likely blank
 
 let pdfjsLib;
@@ -44,8 +47,13 @@ async function main() {
 
   // STEP 2: Find questions needing images
   // Ignore ENGLISH section since words like "table" or "figure out" trigger false positives
-  const imageQs = questions.filter(q => q.section !== 'ENGLISH' && IMAGE_KEYWORDS.test(q.question_text));
-  console.log(`  ${imageQs.length} questions match image keywords\n`);
+  const imageQs = questions.filter(q => {
+    if (q.section === 'ENGLISH') return false;
+    return IMAGE_KEYWORDS.test(q.question_text) || 
+           SUSPICIOUS_PATTERNS.test(q.question_text) || 
+           q.question_text.length < 35;
+  });
+  console.log(`  ${imageQs.length} questions match image criteria\n`);
 
   // Group by source PDF
   const byPdf = {};

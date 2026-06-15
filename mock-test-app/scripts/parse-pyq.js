@@ -41,71 +41,149 @@ const OUTPUT_FILE = path.resolve(__dirname, '..', 'data', 'questions.json');
 
 // ── Topic keyword map ───────────────────────────────────────
 const TOPIC_KEYWORDS = {
-  QUANT_NUMBER_SYSTEM:['lcm','hcf','divisible','divisibility','factor','remainder','fraction','decimal','prime','integer','natural number','whole number'],
-  QUANT_PERCENTAGE:['percent','%','percentage'],
-  QUANT_RATIO_PROPORTION:['ratio','proportion','proportional','mean proportional'],
-  QUANT_AVERAGE:['average','weighted average'],
-  QUANT_INTEREST:['simple interest','compound interest','rate of interest','principal','per annum'],
-  QUANT_PROFIT_LOSS:['profit','loss','selling price','cost price','discount','marked price'],
-  QUANT_MIXTURE_ALLEGATION:['mixture','alligation','concentration'],
-  QUANT_TIME_DISTANCE:['speed','distance','train','boat','upstream','downstream','km/h','km/hr','m/s','overtake'],
-  QUANT_TIME_WORK:['work','pipe','cistern','fill','empty','efficiency'],
-  QUANT_ALGEBRA:['polynomial','equation','identity','surd','quadratic','simplify','value of','expression','algebra','if x','x +','x²','x³'],
-  QUANT_GEOMETRY:['triangle','circle','angle','perpendicular','bisector','tangent','chord','diameter','radius','congruent','similar','quadrilateral','rhombus','trapezium','parallelogram','centroid','orthocentre','incentre','circumcentre','geometry'],
-  QUANT_MENSURATION:['area','volume','surface area','perimeter','circumference','cuboid','cylinder','cone','sphere','hemisphere','prism','pyramid','mensuration'],
-  QUANT_TRIGONOMETRY:['sin','cos','tan','cosec','sec','cot','trigonometr','angle of elevation','angle of depression','height and distance'],
-  QUANT_STATISTICS:['median','mode','range','bar graph','pie chart','histogram','frequency','standard deviation','data interpretation'],
-  QUANT_SQUARE_ROOT:['square root','cube root','perfect square','perfect cube'],
-  REASON_ANALOGY:['is related to','::','analogy','in the same way','related pair'],
-  REASON_CLASSIFICATION:['odd one','does not belong','different from','odd man','which one is different'],
-  REASON_SERIES:['next term','next number','series','sequence','missing number','what comes next','wrong number'],
-  REASON_CODING_DECODING:['coded as','coding','decoding','certain code'],
-  REASON_BLOOD_RELATION:['brother','sister','father','mother','son','daughter','uncle','aunt','nephew','niece','blood relation','husband','wife','grandfather','grandmother'],
-  REASON_DIRECTION_DISTANCE:['north','south','east','west','direction','left turn','right turn','facing','starting point'],
-  REASON_RANKING_ARRANGEMENT:['rank','position','seating','arrangement'],
-  REASON_SYLLOGISM:['statement','conclusion','assumption','syllogism'],
-  REASON_VENN_DIAGRAM:['venn','best represent'],
-  REASON_MATRIX:['matrix'],
-  REASON_FIGURE_COUNTING:['how many triangles','how many squares','count the','number of triangles'],
-  REASON_PAPER_FOLDING:['paper','fold','punch','unfold'],
-  REASON_MIRROR_WATER:['mirror','water image','reflection'],
-  REASON_EMBEDDED_FIGURE:['embedded','hidden figure'],
-  REASON_PATTERN_COMPLETION:['pattern','complete the','missing figure'],
-  REASON_MATHEMATICAL_OPS:['interchange','replace sign','mathematical operation'],
-  REASON_DICE_CUBE:['dice','cube','opposite face'],
-  GS_HISTORY:['battle','dynasty','mughal','maurya','gupta','empire','ruler','movement','revolt','independence','freedom fighter','gandhi','nehru','british','vedic','harappa','indus'],
-  GS_POLITY:['constitution','article','amendment','fundamental','parliament','lok sabha','rajya sabha','president','governor','supreme court','high court','panchayat','judiciary'],
-  GS_GEOGRAPHY:['river','mountain','plateau','ocean','continent','latitude','longitude','climate','monsoon','earthquake','volcano','soil','mineral','peninsula'],
-  GS_ECONOMY:['gdp','inflation','budget','tax','fiscal','monetary','rbi','reserve bank','niti','subsidy','fdi','gst','economy'],
-  GS_SCIENCE_PHYSICS:['force','motion','gravity','newton','energy','electric','current','resistance','voltage','magnet','wave','sound','light','lens','refraction','nucleus','pressure','momentum'],
-  GS_SCIENCE_CHEMISTRY:['element','compound','acid','base','salt','ph','periodic','chemical','reaction','oxidation','reduction','alloy','corrosion','polymer','molecule'],
-  GS_SCIENCE_BIOLOGY:['cell','blood','heart','liver','kidney','brain','vitamin','protein','enzyme','dna','gene','chromosome','disease','virus','bacteria','photosynthesis','hormone','vaccine'],
-  GS_ENVIRONMENT:['environment','ecology','ecosystem','biodiversity','pollution','greenhouse','ozone','global warming','wildlife','national park','sanctuary','conservation'],
-  GS_CURRENT_AFFAIRS:['award','prize','tournament','champion','medal','summit','conference','launched','minister','appointed','inaugurat','yojana','abhiyan'],
-  GS_CULTURE_ART:['dance','music','painting','festival','temple','folk','classical','raga','instrument','heritage','unesco','sculpture','architecture'],
-  GS_COMPUTER_IT:['computer','software','hardware','internet','ram','rom','cpu','binary','programming','algorithm','database','network'],
-  GS_DEFENCE_SCHEMES:['army','navy','air force','defence','missile','satellite','isro','drdo','pradhan mantri'],
-  ENG_ERROR_SPOTTING:['error','grammatical error','spot the error','no error'],
-  ENG_FILL_BLANKS:['fill in','blank','suitable word','appropriate word'],
-  ENG_SYNONYMS:['synonym','similar in meaning','closest in meaning','same meaning'],
-  ENG_ANTONYMS:['antonym','opposite in meaning','opposite meaning'],
-  ENG_SPELLING:['correct spelling','correctly spelt','misspelt','misspelled'],
-  ENG_IDIOMS_PHRASES:['idiom','phrase','expression means','proverb'],
-  ENG_ONE_WORD_SUB:['one word','substitution','one-word'],
-  ENG_SENTENCE_IMPROVEMENT:['improve','improvement','bold part','underlined'],
-  ENG_ACTIVE_PASSIVE:['active','passive','voice','change the voice'],
-  ENG_DIRECT_INDIRECT:['direct','indirect','narration','reported speech'],
-  ENG_SENTENCE_REARRANGEMENT:['rearrange','jumbled','para jumble','sentence parts'],
-  ENG_READING_COMPREHENSION:['passage','read the passage','comprehension','according to the passage','author'],
-  ENG_CLOZE_TEST:['cloze','cloze test','numbered blanks']
+  QUANT_NUMBER_SYSTEM: ['lcm', 'hcf', 'divisible', 'divisibility', 'factor', 'remainder', 'fraction', 'decimal', 'prime', 'integer', 'natural number', 'whole number'],
+  QUANT_PERCENTAGE: ['percent', '%', 'percentage'],
+  QUANT_RATIO_PROPORTION: ['ratio', 'proportion', 'proportional', 'mean proportional'],
+  QUANT_AVERAGE: ['average', 'weighted average'],
+  QUANT_INTEREST: ['simple interest', 'compound interest', 'rate of interest', 'principal', 'per annum'],
+  QUANT_PROFIT_LOSS: ['profit', 'loss', 'selling price', 'cost price', 'discount', 'marked price'],
+  QUANT_MIXTURE_ALLEGATION: ['mixture', 'alligation', 'concentration'],
+  QUANT_TIME_DISTANCE: ['speed', 'distance', 'train', 'boat', 'upstream', 'downstream', 'km/h', 'km/hr', 'm/s', 'overtake'],
+  QUANT_TIME_WORK: ['work', 'pipe', 'cistern', 'fill', 'empty', 'efficiency'],
+  QUANT_ALGEBRA: ['polynomial', 'equation', 'identity', 'surd', 'quadratic', 'simplify', 'value of', 'expression', 'algebra', 'if x', 'x +', 'x²', 'x³'],
+  QUANT_GEOMETRY: ['triangle', 'circle', 'angle', 'perpendicular', 'bisector', 'tangent', 'chord', 'diameter', 'radius', 'congruent', 'similar', 'quadrilateral', 'rhombus', 'trapezium', 'parallelogram', 'centroid', 'orthocentre', 'incentre', 'circumcentre', 'geometry'],
+  QUANT_MENSURATION: ['area', 'volume', 'surface area', 'perimeter', 'circumference', 'cuboid', 'cylinder', 'cone', 'sphere', 'hemisphere', 'prism', 'pyramid', 'mensuration'],
+  QUANT_TRIGONOMETRY: ['sin', 'cos', 'tan', 'cosec', 'sec', 'cot', 'trigonometr', 'angle of elevation', 'angle of depression', 'height and distance'],
+  QUANT_STATISTICS: ['median', 'mode', 'range', 'bar graph', 'pie chart', 'histogram', 'frequency', 'standard deviation', 'data interpretation'],
+  QUANT_SQUARE_ROOT: ['square root', 'cube root', 'perfect square', 'perfect cube'],
+  REASON_ANALOGY: ['is related to', '::', 'analogy', 'in the same way', 'related pair'],
+  REASON_CLASSIFICATION: ['odd one', 'does not belong', 'different from', 'odd man', 'which one is different'],
+  REASON_SERIES: ['next term', 'next number', 'series', 'sequence', 'missing number', 'what comes next', 'wrong number'],
+  REASON_CODING_DECODING: ['coded as', 'coding', 'decoding', 'certain code'],
+  REASON_BLOOD_RELATION: ['brother', 'sister', 'father', 'mother', 'son', 'daughter', 'uncle', 'aunt', 'nephew', 'niece', 'blood relation', 'husband', 'wife', 'grandfather', 'grandmother'],
+  REASON_DIRECTION_DISTANCE: ['north', 'south', 'east', 'west', 'direction', 'left turn', 'right turn', 'facing', 'starting point'],
+  REASON_RANKING_ARRANGEMENT: ['rank', 'position', 'seating', 'arrangement'],
+  REASON_SYLLOGISM: ['statement', 'conclusion', 'assumption', 'syllogism'],
+  REASON_VENN_DIAGRAM: ['venn', 'best represent'],
+  REASON_MATRIX: ['matrix'],
+  REASON_FIGURE_COUNTING: ['how many triangles', 'how many squares', 'count the', 'number of triangles'],
+  REASON_PAPER_FOLDING: ['paper', 'fold', 'punch', 'unfold'],
+  REASON_MIRROR_WATER: ['mirror', 'water image', 'reflection'],
+  REASON_EMBEDDED_FIGURE: ['embedded', 'hidden figure'],
+  REASON_PATTERN_COMPLETION: ['pattern', 'complete the', 'missing figure'],
+  REASON_MATHEMATICAL_OPS: ['interchange', 'replace sign', 'mathematical operation'],
+  REASON_DICE_CUBE: ['dice', 'cube', 'opposite face'],
+  GS_HISTORY: ['battle', 'dynasty', 'mughal', 'maurya', 'gupta', 'empire', 'ruler', 'movement', 'revolt', 'independence', 'freedom fighter', 'gandhi', 'nehru', 'british', 'vedic', 'harappa', 'indus'],
+  GS_POLITY: ['constitution', 'article', 'amendment', 'fundamental', 'parliament', 'lok sabha', 'rajya sabha', 'president', 'governor', 'supreme court', 'high court', 'panchayat', 'judiciary'],
+  GS_GEOGRAPHY: ['river', 'mountain', 'plateau', 'ocean', 'continent', 'latitude', 'longitude', 'climate', 'monsoon', 'earthquake', 'volcano', 'soil', 'mineral', 'peninsula'],
+  GS_ECONOMY: ['gdp', 'inflation', 'budget', 'tax', 'fiscal', 'monetary', 'rbi', 'reserve bank', 'niti', 'subsidy', 'fdi', 'gst', 'economy'],
+  GS_SCIENCE_PHYSICS: ['force', 'motion', 'gravity', 'newton', 'energy', 'electric', 'current', 'resistance', 'voltage', 'magnet', 'wave', 'sound', 'light', 'lens', 'refraction', 'nucleus', 'pressure', 'momentum'],
+  GS_SCIENCE_CHEMISTRY: ['element', 'compound', 'acid', 'base', 'salt', 'ph', 'periodic', 'chemical', 'reaction', 'oxidation', 'reduction', 'alloy', 'corrosion', 'polymer', 'molecule'],
+  GS_SCIENCE_BIOLOGY: ['cell', 'blood', 'heart', 'liver', 'kidney', 'brain', 'vitamin', 'protein', 'enzyme', 'dna', 'gene', 'chromosome', 'disease', 'virus', 'bacteria', 'photosynthesis', 'hormone', 'vaccine'],
+  GS_ENVIRONMENT: ['environment', 'ecology', 'ecosystem', 'biodiversity', 'pollution', 'greenhouse', 'ozone', 'global warming', 'wildlife', 'national park', 'sanctuary', 'conservation'],
+  GS_CURRENT_AFFAIRS: ['award', 'prize', 'tournament', 'champion', 'medal', 'summit', 'conference', 'launched', 'minister', 'appointed', 'inaugurat', 'yojana', 'abhiyan'],
+  GS_CULTURE_ART: ['dance', 'music', 'painting', 'festival', 'temple', 'folk', 'classical', 'raga', 'instrument', 'heritage', 'unesco', 'sculpture', 'architecture'],
+  GS_COMPUTER_IT: ['computer', 'software', 'hardware', 'internet', 'ram', 'rom', 'cpu', 'binary', 'programming', 'algorithm', 'database', 'network'],
+  GS_DEFENCE_SCHEMES: ['army', 'navy', 'air force', 'defence', 'missile', 'satellite', 'isro', 'drdo', 'pradhan mantri'],
+  ENG_ERROR_SPOTTING: ['error', 'grammatical error', 'spot the error', 'no error'],
+  ENG_FILL_BLANKS: ['fill in', 'blank', 'suitable word', 'appropriate word'],
+  ENG_SYNONYMS: ['synonym', 'similar in meaning', 'closest in meaning', 'same meaning'],
+  ENG_ANTONYMS: ['antonym', 'opposite in meaning', 'opposite meaning'],
+  ENG_SPELLING: ['correct spelling', 'correctly spelt', 'misspelt', 'misspelled'],
+  ENG_IDIOMS_PHRASES: ['idiom', 'phrase', 'expression means', 'proverb'],
+  ENG_ONE_WORD_SUB: ['one word', 'substitution', 'one-word'],
+  ENG_SENTENCE_IMPROVEMENT: ['improve', 'improvement', 'bold part', 'underlined'],
+  ENG_ACTIVE_PASSIVE: ['active', 'passive', 'voice', 'change the voice'],
+  ENG_DIRECT_INDIRECT: ['direct', 'indirect', 'narration', 'reported speech'],
+  ENG_SENTENCE_REARRANGEMENT: ['rearrange', 'jumbled', 'para jumble', 'sentence parts'],
+  ENG_READING_COMPREHENSION: ['passage', 'read the passage', 'comprehension', 'according to the passage', 'author'],
+  ENG_CLOZE_TEST: ['cloze', 'cloze test', 'numbered blanks']
 };
+
+// ── Figure/diagram keyword detection (Bug 2 fix) ───────────
+// A question is image-based ONLY if its text has these phrases.
+// Never flag based on empty options alone.
+const IMAGE_KEYWORDS = [
+  'select the figure',
+  'figure that will replace',
+  'figure that will come',
+  'figure should replace',
+  'figure series',
+  'following figure series',
+  'following series',
+  'mirror image',
+  'water image',
+  'embedded in the given figure',
+  'option figure which is embedded',
+  'paper is folded',
+  'paper folding',
+  'paper fold',
+  'punch hole',
+  'positions of the same dice',
+  'positions of the dice',
+  'replace the question mark',
+  'replace ?',
+  'complete the pattern',
+  'complete the figure',
+  'count the number of',
+  'how many triangles',
+  'how many squares',
+  'answer figure',
+  'problem figure',
+  'question mark (?) in the following',
+  'hidden figure',
+  'find the pattern',
+  'venn diagram',
+];
+
+function isImageQuestion(questionText) {
+  const lower = questionText.toLowerCase();
+  return IMAGE_KEYWORDS.some(kw => lower.includes(kw));
+}
+
+// ── Ad / noise lines to skip ─────────────────────────────────
+const AD_PATTERNS = [
+  /adda\s*247/i,
+  /testprime/i,
+  /test\s+prime/i,
+  /get it on/i,
+  /google play/i,
+  /70,000\+/i,
+  /mock tests/i,
+  /personalised report/i,
+  /unlimited re-attempt/i,
+  /exam covered/i,
+  /previous year papers/i,
+  /500%\s+refund/i,
+  /attempt free mock/i,
+  /nabard/i,
+  /ibps/i,
+  /applink\.adda247/i,
+  /www\.adda247/i,
+  /one subscription/i,
+  /all exams/i,
+  /refund on selection/i,
+  /download the app/i,
+  /free quizzes/i,
+  /job alerts/i,
+  /exammix\.com/i,
+];
+
+function isAdLine(line) {
+  return AD_PATTERNS.some(p => p.test(line));
+}
 
 // ── Section patterns ────────────────────────────────────────
 const SECTION_HEADERS = [
-  { regex: /Section\s*:\s*General Intelligence and Reasoning|General\s+Intelligence\s+(?:and|&)\s+Reasoning|Reasoning\s+Ability/i, section: 'REASONING' },
-  { regex: /Section\s*:\s*General Awareness|General\s+Awareness|General\s+Knowledge|General\s+Studies/i, section: 'GS' },
-  { regex: /Section\s*:\s*Quantitative Aptitude|Quantitative\s+Aptitude|Mathematics|Mathematical\s+Ability/i, section: 'QUANT' },
-  { regex: /Section\s*:\s*English Comprehension|English\s+Comprehension|English\s+Language/i, section: 'ENGLISH' },
+  { regex: /^Section\s*[:\-]\s*(.*General Intelligence.*|.*Reasoning.*)/i, section: 'REASONING' },
+  { regex: /^Section\s*[:\-]\s*(.*General Awareness.*|.*General Knowledge.*|.*General Studies.*)/i, section: 'GS' },
+  { regex: /^Section\s*[:\-]\s*(.*Quantitative Aptitude.*|.*Mathematics.*|.*Mathematical Ability.*)/i, section: 'QUANT' },
+  { regex: /^Section\s*[:\-]\s*(.*English.*|.*Language Comprehension.*)/i, section: 'ENGLISH' },
+  // Fallback for lines that are exactly the section name without "Section:"
+  { regex: /^(General Intelligence and Reasoning|General Intelligence|Reasoning|Reasoning Ability)$/i, section: 'REASONING' },
+  { regex: /^(General Awareness|General Knowledge|General Studies)$/i, section: 'GS' },
+  { regex: /^(Quantitative Aptitude|Mathematics|Mathematical Ability)$/i, section: 'QUANT' },
+  { regex: /^(English Comprehension|English Language|English|Language Comprehension)$/i, section: 'ENGLISH' },
 ];
 
 // Standard SSC CGL Tier-1 section order (used as fallback)
@@ -153,7 +231,7 @@ function assignSectionByQNum(qNum, markers) {
   }
   // Use detected order, or fall back to default
   const sectionOrder = order.length === 4 ? order : DEFAULT_SECTION_ORDER;
-  
+
   if (qNum >= 1 && qNum <= 25) return sectionOrder[0];
   if (qNum >= 26 && qNum <= 50) return sectionOrder[1];
   if (qNum >= 51 && qNum <= 75) return sectionOrder[2];
@@ -176,10 +254,10 @@ function extractMeta(filename) {
   let year = null, shift = null;
   const ym = filename.match(/20(1[89]|2[0-5])/);
   if (ym) year = parseInt('20' + ym[1]);
-  
+
   // Dec papers without year in filename (e.g., "1-Dec-11.45PM-EN.pdf") → 2024
   if (!year && /\d+-Dec-/i.test(filename)) year = 2024;
-  
+
   const sm = filename.match(/Shift[\s-]*(\d)/i) || filename.match(/S(\d)-English/i);
   if (sm) shift = 'S' + sm[1];
   else if (/9[\s]*AM/i.test(filename)) shift = 'S1';
@@ -198,39 +276,48 @@ async function extractLines(filePath) {
   const checkmarkYs = [];
 
   for (let p = 1; p <= doc.numPages; p++) {
-    const page = await doc.getPage(p);
-    const tc = await page.getTextContent();
-    const opList = await page.getOperatorList();
-    
-    // Extract checkmark Ys
-    let lastTransform = null;
-    for (let i = 0; i < opList.fnArray.length; i++) {
-      if (opList.fnArray[i] === pdfjsLib.OPS.transform) lastTransform = opList.argsArray[i];
-      if (opList.fnArray[i] === pdfjsLib.OPS.paintImageXObject) {
-        const w = opList.argsArray[i][1];
-        const h = opList.argsArray[i][2];
-        if (lastTransform && w === h && w >= 14 && w <= 24) {
-           checkmarkYs.push(lastTransform[5]);
+    try {
+      const page = await doc.getPage(p);
+      const tc = await page.getTextContent();
+      const opList = await page.getOperatorList();
+
+      // Extract checkmark Ys
+      let lastTransform = null;
+      for (let i = 0; i < opList.fnArray.length; i++) {
+        if (opList.fnArray[i] === pdfjsLib.OPS.transform) lastTransform = opList.argsArray[i];
+        if (opList.fnArray[i] === pdfjsLib.OPS.paintImageXObject) {
+          const w = opList.argsArray[i][1];
+          const h = opList.argsArray[i][2];
+          if (lastTransform && w === h && w >= 14 && w <= 24) {
+            checkmarkYs.push(lastTransform[5]);
+          }
         }
       }
-    }
 
-    let lastY = null, buf = [];
-    for (const item of tc.items) {
-      if (!item.str) continue;
-      const text = item.str;
-      if (!text.trim()) continue;
-      const y = item.transform ? Math.round(item.transform[5]) : 0;
+      let lastY = null, buf = [];
+      for (const item of tc.items) {
+        if (!item.str) continue;
+        const text = item.str;
+        if (!text.trim()) continue;
+        const y = item.transform ? Math.round(item.transform[5]) : 0;
 
-      if (lastY !== null && Math.abs(y - lastY) > 4) {
-        if (buf.length) lineObjects.push({ str: buf.join(' '), y: lastY });
-        buf = [text];
-      } else {
-        buf.push(text);
+        if (lastY !== null && Math.abs(y - lastY) > 4) {
+          const joined = buf.join(' ');
+          if (joined && !isAdLine(joined)) lineObjects.push({ str: joined, y: lastY });
+          buf = [text];
+        } else {
+          buf.push(text);
+        }
+        lastY = y;
       }
-      lastY = y;
+      if (buf.length) {
+        const joined = buf.join(' ');
+        if (joined && !isAdLine(joined)) lineObjects.push({ str: joined, y: lastY });
+      }
+    } catch (pageErr) {
+      // Skip bad page — don't abort entire PDF
+      console.warn(`    ⚠ Page ${p} error: ${pageErr.message}`);
     }
-    if (buf.length) lineObjects.push({ str: buf.join(' '), y: lastY });
   }
   return { lineObjects, checkmarkYs };
 }
@@ -315,7 +402,7 @@ function parseFormatA(lines, filename, year, shift) {
             if (om) {
               const idx = parseInt(om[1]);
               if (idx >= 1 && idx <= 4) {
-                options[['A','B','C','D'][idx-1]] = om[2].trim();
+                options[['A', 'B', 'C', 'D'][idx - 1]] = om[2].trim();
               }
             }
           }
@@ -330,7 +417,7 @@ function parseFormatA(lines, filename, year, shift) {
           const cm = cl.match(/Chosen Option\s*:\s*(\d)/i);
           if (cm) {
             const idx = parseInt(cm[1]);
-            if (idx >= 1 && idx <= 4) correctOpt = ['A','B','C','D'][idx-1];
+            if (idx >= 1 && idx <= 4) correctOpt = ['A', 'B', 'C', 'D'][idx - 1];
           }
           i++;
           break;
@@ -344,7 +431,7 @@ function parseFormatA(lines, filename, year, shift) {
 
       if (qText.length > 5 && correctOpt) {
         questions.push({
-          id: `${filename.replace(/\.pdf$/i,'')}-Q${String(qNum).padStart(3,'0')}`,
+          id: `${filename.replace(/\.pdf$/i, '')}-Q${String(qNum).padStart(3, '0')}`,
           _qNum: qNum,
           section: qSection,
           topic: null,
@@ -425,7 +512,7 @@ function parseFormatB(lines, filename, year, shift) {
 
       if (qText.length > 5 && correctOpt) {
         questions.push({
-          id: `${filename.replace(/\.pdf$/i,'')}-Q${String(qNum).padStart(3,'0')}`,
+          id: `${filename.replace(/\.pdf$/i, '')}-Q${String(qNum).padStart(3, '0')}`,
           _qNum: qNum,
           section: qSection,
           topic: null,
@@ -457,7 +544,7 @@ function parseFormatC(lines, filename, year, shift) {
   // First pass: find ALL answer lines: "N. ( x ) explanation"
   // These are answers/explanations, distinguished by having (a)/(b)/(c)/(d) right after N.
   const answerMap = {};
-  
+
   for (const line of lines) {
     const m = line.match(/^(\d+)\.\s*\(\s*([a-dA-D])\s*\)\s*(.*)/);
     if (m) {
@@ -489,7 +576,7 @@ function parseFormatC(lines, filename, year, shift) {
   // Skip lines that are answer lines (already captured above)
   let i = 0;
   const questionLines = [];
-  
+
   while (i < lines.length) {
     const line = lines[i].trim();
 
@@ -549,7 +636,7 @@ function parseFormatC(lines, filename, year, shift) {
           const qSection = currentSection || assignSectionByQNum(qNum, []);
           if (qText.length > 3 && answer) {
             questions.push({
-              id: `${filename.replace(/\.pdf$/i,'')}-Q${String(qNum).padStart(3,'0')}`,
+              id: `${filename.replace(/\.pdf$/i, '')}-Q${String(qNum).padStart(3, '0')}`,
               _qNum: qNum,
               section: qSection,
               topic: null,
@@ -625,7 +712,7 @@ function parseFormatD(lines, filename, year, shift) {
         const optM = cl.match(/^\(?([A-Da-d])\)?[\.\)\s]\s*(.*)/);
         if (optM) {
           const letter = optM[1].toUpperCase();
-          if (['A','B','C','D'].includes(letter)) {
+          if (['A', 'B', 'C', 'D'].includes(letter)) {
             options[letter] = optM[2].trim();
             lastOpt = letter;
             i++;
@@ -645,7 +732,7 @@ function parseFormatD(lines, filename, year, shift) {
       const qSection = currentSection || assignSectionByQNum(qNum, []);
       if (qText.length > 5) {
         questions.push({
-          id: `${filename.replace(/\.pdf$/i,'')}-Q${String(qNum).padStart(3,'0')}`,
+          id: `${filename.replace(/\.pdf$/i, '')}-Q${String(qNum).padStart(3, '0')}`,
           _qNum: qNum,
           section: qSection,
           topic: null,
@@ -672,9 +759,9 @@ function autoTagTopic(text, section) {
   for (const [topic, keywords] of Object.entries(TOPIC_KEYWORDS)) {
     const topicPrefix = topic.split('_')[0];
     const bonus = (topicPrefix === 'QUANT' && section === 'QUANT') ? 2 :
-                  (topicPrefix === 'REASON' && section === 'REASONING') ? 2 :
-                  (topicPrefix === 'GS' && section === 'GS') ? 2 :
-                  (topicPrefix === 'ENG' && section === 'ENGLISH') ? 2 : 0;
+      (topicPrefix === 'REASON' && section === 'REASONING') ? 2 :
+        (topicPrefix === 'GS' && section === 'GS') ? 2 :
+          (topicPrefix === 'ENG' && section === 'ENGLISH') ? 2 : 0;
     let score = 0;
     for (const kw of keywords) {
       if (lower.includes(kw)) score += kw.length + bonus;
@@ -683,7 +770,7 @@ function autoTagTopic(text, section) {
   }
 
   if (!bestTopic && section) {
-    const defaults = { QUANT:'QUANT_ALGEBRA', REASONING:'REASON_ANALOGY', GS:'GS_CURRENT_AFFAIRS', ENGLISH:'ENG_FILL_BLANKS' };
+    const defaults = { QUANT: 'QUANT_ALGEBRA', REASONING: 'REASON_ANALOGY', GS: 'GS_CURRENT_AFFAIRS', ENGLISH: 'ENG_FILL_BLANKS' };
     bestTopic = defaults[section] || null;
   }
   return bestTopic;
@@ -692,17 +779,34 @@ function autoTagTopic(text, section) {
 // ── Deduplication ───────────────────────────────────────────
 function dedup(questions) {
   const seen = new Map();
+  const duplicates = [];
+  let dupCounter = 1;
+
   for (const q of questions) {
-    const key = q.question_text.toLowerCase().replace(/\s+/g,' ').replace(/[^\w\s]/g,'').trim().substring(0,80);
+    const key = q.question_text.toLowerCase().replace(/\s+/g, ' ').replace(/[^\w\s]/g, '').trim().substring(0, 80);
     if (!seen.has(key)) {
       seen.set(key, q);
     } else {
       const ex = seen.get(key);
-      if (!ex.correct_option && q.correct_option) seen.set(key, q);
-      if (!ex.explanation && q.explanation) ex.explanation = q.explanation;
+      if (!ex.correct_option && q.correct_option) {
+        duplicates.push(ex);
+        seen.set(key, q);
+      } else {
+        if (!ex.explanation && q.explanation) ex.explanation = q.explanation;
+        duplicates.push(q);
+      }
     }
   }
-  return [...seen.values()];
+
+  // Move duplicates to MISC section so they don't appear in Full Mock Tests
+  // but are still accessible via Topic-wise Tests under MISC > Duplicate Questions.
+  for (const dup of duplicates) {
+    dup.section = 'MISC';
+    dup.topic = 'MISC_DUPLICATE';
+    dup.id = dup.id + '_DUP' + dupCounter++;
+  }
+
+  return [...seen.values(), ...duplicates];
 }
 
 // ── Main ────────────────────────────────────────────────────
@@ -725,7 +829,7 @@ async function main() {
 
   const allQuestions = [];
   const errors = [];
-  const formatCounts = { A:0, B:0, C:0, D:0 };
+  const formatCounts = { A: 0, B: 0, C: 0, D: 0 };
 
   for (const file of files) {
     try {
@@ -742,36 +846,116 @@ async function main() {
         case 'B': questions = parseFormatB(lines, file, year, shift); break;
         case 'C': questions = parseFormatC(lines, file, year, shift); break;
         case 'D': questions = parseFormatD(lines, file, year, shift); break;
-        default:  questions = parseFormatD(lines, file, year, shift);
+        default: questions = parseFormatD(lines, file, year, shift);
       }
 
       // Auto-tag topics and fix missing sections
       for (const q of questions) {
         q.topic = autoTagTopic(q.question_text, q.section);
-        
+
         // If section still null, try to infer from topic
         if (!q.section && q.topic) {
           q.section = inferSectionFromTopic(q.topic);
         }
-        
+
         // Last resort: assign by question number
         if (!q.section && q._qNum) {
           q.section = assignSectionByQNum(q._qNum, []);
         }
-        
+
+        // ── CORE FIX: Rescue questions assigned to wrong sections ──
+        // When section headers are absent, questions are position-assigned (Q1-25,
+        // Q26-50, etc.) using the default order. If the paper's actual order differs,
+        // questions land in wrong sections. We rescue using section-unique keywords
+        // that CANNOT plausibly appear in other sections' question texts.
+        (() => {
+          const lower = q.question_text.toLowerCase();
+
+          // ENGLISH rescue — English vocabulary is extremely distinctive
+          const isEnglish = [
+            'passive voice', 'active voice', 'direct speech', 'indirect speech',
+            'narration', 'synonym of', 'antonym of', 'synonymous with',
+            'one word substitution', 'one-word substitution',
+            'correct spelling', 'misspelt', 'misspelled', 'correctly spelt',
+            'error in the sentence', 'spot the error', 'no error',
+            'fill in the blank', 'reading comprehension', 'cloze test',
+            'rearrange the following', 'sentence improvement', 'phrasal verb',
+            'most appropriate word to fill', 'grammatically correct sentence',
+            'select the correct',  // only valid in English grammar context
+          ].some(kw => lower.includes(kw));
+
+          // REASONING rescue — uniquely identifiable Reasoning question types
+          const isReasoning = [
+            ' is to ', ' :: ', 'is related to', 'find the odd', 'odd one out',
+            'odd man out', 'select the odd', 'which does not belong',
+            'is coded as', 'coded as', 'in a certain code',
+            'is the son of', 'is the daughter of', 'is the father of',
+            'is the mother of', 'is the brother of', 'is the sister of',
+            'blood relation', 'pointing to',
+            'facing north', 'facing south', 'facing east', 'facing west',
+            'turned left', 'turned right', 'walks north', 'walks south',
+            'mirror image', 'water image',
+            'paper is folded', 'when the paper', 'punch hole',
+            'how many triangles', 'how many squares', 'count the number of',
+            'embedded figure', 'figure matrix', 'complete the pattern',
+            'dice is', 'face of the cube', 'opposite face',
+            'sitting in a row', 'seating arrangement', 'linear arrangement',
+            'venn diagram best represent',
+          ].some(kw => lower.includes(kw));
+
+          // GS rescue — specific to General Awareness content
+          const isGS = [
+            'constitution of india', 'article of the constitution',
+            'fundamental right', 'directive principle', 'rajya sabha', 'lok sabha',
+            'the battle of', 'mughal', 'maurya', 'gupta dynasty',
+            'mahatma gandhi', 'jawaharlal nehru', 'subhas chandra',
+            'si unit of', 's.i. unit of', 'unit of measurement',
+            'national park', 'wildlife sanctuary', 'biosphere reserve',
+            'gst', 'goods and services tax', 'reserve bank of india',
+            'which article', 'schedule of the constitution',
+            'pradhan mantri', 'yojana', 'launched by the government',
+            'who is the author of the book', 'written by',
+          ].some(kw => lower.includes(kw));
+
+          // Apply rescue — only override if wrongly assigned
+          if (isEnglish && q.section !== 'ENGLISH') q.section = 'ENGLISH';
+          else if (isReasoning && q.section !== 'REASONING') q.section = 'REASONING';
+          else if (isGS && q.section !== 'GS') q.section = 'GS';
+        })();
+
+
         // Clean up internal field
         delete q._qNum;
+
+
+        // ── Bug 2 fix: keyword-based image detection ──
+        const hasImage = isImageQuestion(q.question_text);
+        q.has_image = hasImage;
+        q.image_url = q.image_url || null;
+
+        // ── Bug 3 fix: flag image-based options ──
+        const opts = q.options || {};
+        const filledOpts = ['A', 'B', 'C', 'D'].filter(l => (opts[l] || '').trim()).length;
+        q.has_image_options = (hasImage && filledOpts < 2);
+
+        // ── Bug 4 fix: underline detection ──
+        q.has_underline = /underlined/i.test(q.question_text);
       }
 
       // Assign to MISC if there is no valid correct answer
       for (const q of questions) {
-        if (!q.correct_option || !['A','B','C','D'].includes(q.correct_option)) {
+        if (!q.correct_option || !['A', 'B', 'C', 'D'].includes(q.correct_option)) {
           q.section = 'MISC';
         }
       }
 
       // Filter valid: require at least some question text
       const valid = questions.filter(q => q.question_text.length > 5);
+
+      // Warn on low count but continue
+      if (valid.length < 80) {
+        console.warn(`     ⚠ LOW COUNT: Only ${valid.length} questions from ${file}`);
+      }
 
       const withAnswer = valid.filter(q => q.section !== 'MISC').length;
       console.log(`     Format ${format} → ${valid.length} extracted (${withAnswer} with answers, ${valid.length - withAnswer} to MISC)`);
@@ -794,15 +978,15 @@ async function main() {
   const bySection = {};
   for (const q of deduped) bySection[q.section || 'UNKNOWN'] = (bySection[q.section || 'UNKNOWN'] || 0) + 1;
   console.log('\n  By section:');
-  for (const [s,c] of Object.entries(bySection)) console.log(`    ${s}: ${c}`);
+  for (const [s, c] of Object.entries(bySection)) console.log(`    ${s}: ${c}`);
 
   const byYear = {};
   for (const q of deduped) byYear[q.year || '?'] = (byYear[q.year || '?'] || 0) + 1;
   console.log('\n  By year:');
-  for (const [y,c] of Object.entries(byYear).sort()) console.log(`    ${y}: ${c}`);
+  for (const [y, c] of Object.entries(byYear).sort()) console.log(`    ${y}: ${c}`);
 
   // Write
-  const output = { version:'2.0', generated_at: new Date().toISOString(), total: deduped.length, parser_errors: errors, questions: deduped };
+  const output = { version: '2.0', generated_at: new Date().toISOString(), total: deduped.length, parser_errors: errors, questions: deduped };
   fs.mkdirSync(path.dirname(OUTPUT_FILE), { recursive: true });
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(output, null, 2), 'utf-8');
 
