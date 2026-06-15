@@ -46,9 +46,17 @@ async function main() {
   fs.mkdirSync(IMAGES_DIR, { recursive: true });
 
   // STEP 2: Find questions needing images
-  // Ignore ENGLISH section since words like "table" or "figure out" trigger false positives
   const imageQs = questions.filter(q => {
+    // Check if it has the underline flag (mainly English questions)
+    if (q.has_underline) return true;
+    
+    // Check if it's missing any options (e.g. Option D is blank)
+    if (q.options && Object.values(q.options).some(opt => !opt || opt.trim() === '')) return true;
+
+    // Ignore other English section questions to avoid false positives with words like "table"
     if (q.section === 'ENGLISH') return false;
+
+    // Check for math/reasoning image keywords and suspicious short patterns
     return IMAGE_KEYWORDS.test(q.question_text) || 
            SUSPICIOUS_PATTERNS.test(q.question_text) || 
            q.question_text.length < 35;

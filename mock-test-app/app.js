@@ -170,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // ── Database Loading ────────────────────────────────────────
 async function loadQuestionDB() {
   const statusEl = $('#db-status');
+  const loader = $('#global-loader');
   try {
     const resp = await fetch(`data/questions.json?v=${Date.now()}`);
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
@@ -184,7 +185,15 @@ async function loadQuestionDB() {
   } catch (err) {
     statusEl.textContent = `⚠ Could not load questions.json — Run parse-pyq.js first`;
     statusEl.style.color = 'var(--color-warning)';
+    if (loader) {
+      $('#loader-text').textContent = 'Error loading database. Please check console.';
+      $('#loader-text').style.color = 'var(--color-danger)';
+    }
     console.warn('DB load failed:', err);
+  } finally {
+    if (loader && APP.dbLoaded) {
+      loader.classList.add('hidden');
+    }
   }
 }
 
@@ -227,6 +236,16 @@ function bindEvents() {
   $('#btn-review').addEventListener('click', toggleReview);
   $('#btn-clear').addEventListener('click', clearResponse);
   $('#btn-submit-test').addEventListener('click', confirmSubmit);
+  
+  // Flag issue
+  const flagBtn = $('#btn-flag-issue');
+  if (flagBtn) {
+    flagBtn.addEventListener('click', () => {
+      const q = APP.flatQuestions[APP.currentQIndex];
+      if (!q) return;
+      prompt('Please copy this Question ID and send it to the developer:', q.id);
+    });
+  }
 
   // Option selection
   $$('.option-item').forEach(opt => {

@@ -9,7 +9,11 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
 </head>
 <body>
-
+  <!-- Global Loader -->
+  <div id="global-loader" class="global-loader">
+    <div class="spinner"></div>
+    <p id="loader-text">Downloading PYQ database (8MB)...</p>
+  </div>
   <!-- ============================================================
        SCREEN 1: HOME
        ============================================================ -->
@@ -137,7 +141,10 @@
 
       <!-- Main question area -->
       <div class="test-main" id="test-main">
-        <div class="question-number" id="question-number">Question 1 of 25</div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-4);">
+          <div class="question-number" id="question-number" style="margin-bottom: 0;">Question 1 of 25</div>
+          <button id="btn-flag-issue" class="btn btn-secondary" style="font-size: var(--font-xs); padding: var(--sp-1) var(--sp-3); opacity: 0.8;">🚩 Report Error</button>
+        </div>
         <div class="question-text" id="question-text">Loading question...</div>
         <div class="question-image-container" id="question-image-container" style="display:none;">
           <img id="question-image" src="" alt="Question figure" class="question-image" />

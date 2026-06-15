@@ -758,13 +758,16 @@ function autoTagTopic(text, section) {
 
   for (const [topic, keywords] of Object.entries(TOPIC_KEYWORDS)) {
     const topicPrefix = topic.split('_')[0];
-    const bonus = (topicPrefix === 'QUANT' && section === 'QUANT') ? 2 :
-      (topicPrefix === 'REASON' && section === 'REASONING') ? 2 :
-        (topicPrefix === 'GS' && section === 'GS') ? 2 :
-          (topicPrefix === 'ENG' && section === 'ENGLISH') ? 2 : 0;
+    
+    // Strict Section Enforcement
+    if (section && section !== 'MISC') {
+      const allowedPrefix = section === 'REASONING' ? 'REASON' : section === 'ENGLISH' ? 'ENG' : section;
+      if (topicPrefix !== allowedPrefix) continue;
+    }
+
     let score = 0;
     for (const kw of keywords) {
-      if (lower.includes(kw)) score += kw.length + bonus;
+      if (lower.includes(kw)) score += kw.length;
     }
     if (score > bestScore) { bestScore = score; bestTopic = topic; }
   }
