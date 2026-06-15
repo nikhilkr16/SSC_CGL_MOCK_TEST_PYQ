@@ -16,7 +16,7 @@ const IMAGES_DIR = path.resolve(DATA_DIR, 'images');
 const QUESTIONS_FILE = path.resolve(DATA_DIR, 'questions.json');
 
 // Only match questions that DEFINITELY reference a visual figure, table, or graph
-const IMAGE_KEYWORDS = /\b(figure|diagram|embedded|mirror image|water image|paper\s*fold|unfold|complete the pattern|question figure|answer figure|problem figure|find the missing|number of triangles|number of squares|how many triangles|how many squares|counting\s*figure|table|graph|pie chart|bar graph|histogram)\b/i;
+const IMAGE_KEYWORDS = /\b(figure|diagram|embedded|mirror image|water image|paper\s*fold|unfold|complete the pattern|question figure|answer figure|problem figure|find the missing|number of triangles|number of squares|how many triangles|how many squares|counting\s*figure|table|graph|pie chart|bar graph|histogram|folding the given sheet|dices that can be formed)\b/i;
 
 // Patterns that indicate the PDF text extractor dropped the math equation or statements
 const SUSPICIOUS_PATTERNS = /solve the following|what is the value of \?|what will be the value of \?|if , then|which is\/are correct\?/i;
