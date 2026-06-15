@@ -1507,12 +1507,52 @@ input, select { font-family: inherit; }
     grid-template-columns: 1fr;
   }
 
+  /* Test Screen Mobile Layout */
   .test-layout {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .test-topbar {
+    flex-shrink: 0;
+  }
+
+  .test-main {
+    flex: 1 1 auto;
+    overflow-y: visible;
+    padding-bottom: var(--sp-8);
   }
 
   .test-sidebar {
-    display: none;
+    display: block;
+    flex-shrink: 0;
+    border-left: none;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: var(--sp-4);
+    height: auto;
+  }
+  
+  .palette-grid {
+    grid-template-columns: repeat(10, 1fr);
+  }
+
+  .test-toolbar {
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: var(--color-surface-base);
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.5);
+    padding: var(--sp-3);
+  }
+
+  .test-toolbar .btn {
+    flex: 1 1 calc(50% - var(--sp-3));
+    font-size: var(--font-sm);
+    padding: var(--sp-2);
   }
 
   .score-card {
@@ -1526,6 +1566,10 @@ input, select { font-family: inherit; }
 }
 
 @media (max-width: 480px) {
+  .palette-grid {
+    grid-template-columns: repeat(7, 1fr);
+  }
+
   .stats-bar {
     grid-template-columns: 1fr;
   }
